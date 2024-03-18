@@ -1,0 +1,88 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px; /* Adjust the top padding as needed */
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .welcome-text {
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+            text-align: left;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fallingText 3s ease forwards;
+            opacity: 0;
+            margin-left: 20px; /* Adjust the left margin as needed */
+        }
+
+        @keyframes fallingText {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="welcome-text">Welcome to the Homepage</h1>
+    <div class="button-container">
+        <a href="/login" class="button">Login</a> <!-- Link to login page -->
+        <a href="/registration" class="button">Registration</a> <!-- Link to registration page -->
+    </div>
+</body>
+</html>

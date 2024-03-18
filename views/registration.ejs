@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voter Registration</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      body {
+        background: linear-gradient(#141e30, #243b55);
+      }
+
+      .container {
+        position: absolute;
+        margin: auto;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 40px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+      }
+
+      .container h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+      }
+
+      .form {
+        width: 100%; /* Make the form fill the container */
+        max-width: 400px; /* Limit the maximum width of the form */
+        margin: 0 auto; /* Center the form horizontally */
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        background: transparent;
+      }
+
+      .form-group label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        pointer-events: none;
+        transition: 0.5s;
+      }
+
+      .form-group input:focus ~ label,
+      .form-group input:valid ~ label {
+        top: -20px;
+        left: 0;
+        color: #03e9f4;
+        font-size: 12px;
+      }
+
+      .btn {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: 0.5s;
+        margin-top: 40px;
+        letter-spacing: 4px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: #03e9f4;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+          0 0 100px #03e9f4;
+      }
+
+      .btn span {
+        position: absolute;
+        display: block;
+      }
+
+      .btn span:nth-child(1) {
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #03e9f4);
+        animation: btn-anim1 1s linear infinite;
+      }
+
+      @keyframes btn-anim1 {
+        0% {
+          left: -100%;
+        }
+        50%,
+        100% {
+          left: 100%;
+        }
+      }
+
+      .btn span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, #03e9f4);
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: 0.25s;
+      }
+
+      @keyframes btn-anim2 {
+        0% {
+          top: -100%;
+        }
+        50%,
+        100% {
+          top: 100%;
+        }
+      }
+
+      .btn span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, #03e9f4);
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes btn-anim3 {
+        0% {
+          right: -100%;
+        }
+        50%,
+        100% {
+          right: 100%;
+        }
+      }
+
+      .btn span:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, #03e9f4);
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: 0.75s;
+      }
+
+      @keyframes btn-anim4 {
+        0% {
+          bottom: -100%;
+        }
+        50%,
+        100% {
+          bottom: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body style="background: linear-gradient(#141e30, #243b55)">
+    <div class="container">
+      <h2>Voter Registration</h2>
+      <form action="/register" method="POST" class="form"  onsubmit="return validateForm()">
+        <div class="form-group">
+          <input type="text" id="name" name="name" required />
+          <label for="name">Name</label>
+        </div>
+
+        <div class="form-group">
+          <input type="number" id="age" name="age" required />
+          <label for="age">Age</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="address" name="address" required />
+          <label for="address">Address</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="phone" name="phone" required />
+          <label for="phone">Phone Number</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="username" name="username" required />
+          <label for="username">Username</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" name="password" required onkeyup="checkPasswordStrength()">
+          <label for="password">Password</label>
+      </div>
+      <div id="password-strength-text"></div>
+      
+        <button type="submit" class="btn">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Register
+        </button>
+      </form>
+    </div>
+    <div id="error-message" style="color: red; display: none;"></div>
+
+    <script>
+      function validateForm() {
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Regular expressions for validation
+        var nameRegex = /^[a-zA-Z\s]+$/;
+        var ageRegex = /^(?:[1-9][0-9]?|100)$/;
+        var phoneRegex = /^[89]\d{9}$/;
+        var usernameRegex = /^[a-zA-Z0-9_]{3,}$/;
+        var passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        // Perform validation checks
+        if (!nameRegex.test(name)) {
+          alert(
+            "Please enter a valid name containing only letters and spaces."
+          );
+          return false;
+        }
+
+        if (!ageRegex.test(age)) {
+          alert("Please enter a valid age (greater than 0 less than 100).");
+          return false;
+        }
+
+        if (!phoneRegex.test(phone)) {
+          alert(
+            "Please enter a valid phone number starting with 8 or 9 and containing 10 digits."
+          );
+          return false;
+        }
+
+        
+        
+        if (!usernameRegex.test(username)) {
+          alert(
+            "Username must be at least 3 characters long and can only contain letters, numbers, and underscores."
+          );
+          return false;
+        }
+
+        if (!passwordRegex.test(password)) {
+          alert(
+            "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character."
+          );
+          return false;
+        }
+
+        return true; // Return true if all validations pass
+      }
+
+      function checkPasswordStrength() {
+        var password = document.getElementById("password").value;
+        var passwordStrength = document.getElementById("password-strength-text");
+
+        // Regular expressions for password strength
+        var lowerCaseLetters = /[a-z]/g;
+        var upperCaseLetters = /[A-Z]/g;
+        var numbers = /[0-9]/g;
+        var specialCharacters = /[@$!%*?&]/g;
+
+        var strength = 0;
+
+        if (password.match(lowerCaseLetters)) {
+          strength++;
+        }
+
+        if (password.match(upperCaseLetters)) {
+          strength++;
+        }
+
+        if (password.match(numbers)) {
+          strength++;
+        }
+
+        if (password.match(specialCharacters)) {
+          strength++;
+        }
+
+        // Update UI based on password strength
+        if (password.length < 8) {
+          passwordStrength.innerHTML = "Password must be at least 8 characters long";
+          passwordStrength.style.color = "red";
+        } else if (strength < 4) {
+          passwordStrength.innerHTML = "Password is weak";
+          passwordStrength.style.color = "red";
+        } else if (strength === 4) {
+          passwordStrength.innerHTML = "Password is strong";
+          passwordStrength.style.color = "green";
+        }
+      }
+    </script>
+  </body>
+</html>

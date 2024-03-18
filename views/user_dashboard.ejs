@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+            color: #fff;
+            text-align: center;
+            min-height: 100vh; /* Set minimum height to fill the viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1, h2, p {
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 2px solid #03e9f4;
+            background-color: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #03e9f4;
+            color: #fff;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.5); /* Add border to hr */
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 10px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 2px solid #03e9f4;
+            background-color: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            max-width: 100px; /* Adjust the max-width as needed */
+        }
+
+        .btn:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 100px #03e9f4;
+        }
+
+        .btn span {
+            position: absolute;
+            display: block;
+        }
+
+        .btn span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+            50%,100% {
+                left: 100%;
+            }
+        }
+
+        .user-info {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Blur effect */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Add padding */
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+            margin: 0 auto; /* Center horizontally */
+            max-width: 400px; /* Set maximum width */
+        }
+
+        .user-info ul {
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .user-info ul li {
+            margin-bottom: 10px;
+        }
+
+        .btn span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: .25s;
+        }
+
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+            50%,100% {
+                top: 100%;
+            }
+        }
+
+        .btn span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: .5s;
+        }
+
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+            50%,100% {
+                right: 100%;
+            }
+        }
+
+        .btn span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: .75s;
+        }
+
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+            50%,100% {
+                bottom: 100%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard, <%= user.username %>!</h1>
+    <a href="/logout"class="btn">Logout</a> <!-- Example logout link -->
+
+    <div class="user-info">
+        <ul>
+            <li><strong>Username:</strong> <%= user.username %></li>
+            <li><strong>Age:</strong> <%= user.age %></li>
+            <li><strong>Address:</strong> <%= user.address %></li>
+            <li><strong>Phone Number:</strong> <%= user.phone %></li>
+            <!-- Add more user information here as needed -->
+        </ul>
+    </div>
+    <hr>
+    <!-- Update form -->
+    <h2>Update Your Information:</h2>
+    <form action="/user/update" method="post">
+        <div><label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" readonly></div>
+
+        <div><label for="age">Age:</label>
+            <input type="text" id="age" name="age" value="<%= user.age %>"></div>
+
+        <div><label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="<%= user.address %>"></div>
+
+        <div> <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" value="<%= user.phone %>"></div>
+
+        <button type="submit" class="btn">Update</button>
+    </form>
+    <hr>
+    <!-- Add links to user-specific features or actions -->
+<!-- Include this script in the dashboard.ejs file -->
+<script>
+    // Check if the user is logged in as admin or user
+    // If yes, replace the current page in the browser history with the dashboard URL
+    if (['admin', 'user'].includes('<%= user.role %>')) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+
+</body>
+</html>

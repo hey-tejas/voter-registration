@@ -1,0 +1,26 @@
+[
+  {
+    "username": "raj",
+    "password": "1234",
+    "role": "user",
+    "age": "25",
+    "address": "nagpur",
+    "phone": "9999999995"
+  },
+  {
+    "username": "admin",
+    "password": "123",
+    "role": "admin",
+    "age": "25",
+    "address": "nagpur",
+    "phone": "9999999991"
+  },
+  {
+    "username": "tejas",
+    "password": "123",
+    "role": "user",
+    "age": "25",
+    "address": "nagpur",
+    "phone": "9887865656"
+  }
+]
